@@ -17,13 +17,13 @@ namespace CPW219_eCommerceSite.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Product product)
+        public async Task<IActionResult> Create(Product product)
         {
             if(ModelState.IsValid)
             {
                 // Add to db
                 _context.products.Add(product);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
                 // Show message on page
                 ViewData["Message"] = $"{product.Name} was added";
                 return View();
