@@ -44,5 +44,15 @@ namespace CPW219_eCommerceSite.Controllers
             
             return View(product);
         }
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            Product currentProduct = await _context.products.FindAsync(id);
+            if (currentProduct == null)
+            {
+                return NotFound();
+            }
+            return View(currentProduct);
+        }
     }
 }
