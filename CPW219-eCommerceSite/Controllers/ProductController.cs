@@ -70,5 +70,36 @@ namespace CPW219_eCommerceSite.Controllers
 
             return View(product);
         }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            Product currentProduct = await _context.products.FindAsync(id);
+            if (currentProduct == null)
+            {
+                return NotFound();
+            }
+            return View(currentProduct);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            // Find product that matches id
+            Product product = await _context.products.FindAsync(id);
+
+            if (product != null)
+            {
+                // Add to db
+                _context.products.Remove(product);
+                await _context.SaveChangesAsync();
+
+                // Show message on page
+                TempData["Message"] = $"{product.Name} was deleted";
+                return RedirectToAction("Index");
+            }
+
+            TempData["Message"] = "Game was already deleted";
+            return RedirectToAction("Index");
+        }
     }
 }
