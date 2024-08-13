@@ -101,5 +101,17 @@ namespace CPW219_eCommerceSite.Controllers
             TempData["Message"] = "Game was already deleted";
             return RedirectToAction("Index");
         }
+
+        public async Task<IActionResult> Details(int id)
+        {
+            Product product = await _context.products.FindAsync(id);
+
+            if (product == null)
+            {
+                return NotFound(); 
+            }
+
+            return View(product);
+        }
     }
 }
