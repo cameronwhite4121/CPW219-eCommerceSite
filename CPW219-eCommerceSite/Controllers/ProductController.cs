@@ -64,7 +64,7 @@ namespace CPW219_eCommerceSite.Controllers
                 _context.products.Update(product);
                 await _context.SaveChangesAsync();
                 // Show message on page
-                ViewData["Message"] = $"{product.Name} was updated";
+                TempData["Message"] = $"{product.Name} was updated";
                 return RedirectToAction("Index");
             }
 
