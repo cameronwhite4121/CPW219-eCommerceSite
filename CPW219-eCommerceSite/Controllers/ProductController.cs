@@ -44,5 +44,31 @@ namespace CPW219_eCommerceSite.Controllers
             
             return View(product);
         }
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            Product currentProduct = await _context.products.FindAsync(id);
+            if (currentProduct == null)
+            {
+                return NotFound();
+            }
+            return View(currentProduct);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(Product product)
+        {
+            if (ModelState.IsValid)
+            {
+                // Add to db
+                _context.products.Update(product);
+                await _context.SaveChangesAsync();
+                // Show message on page
+                TempData["Message"] = $"{product.Name} was updated";
+                return RedirectToAction("Index");
+            }
+
+            return View(product);
+        }
     }
 }
