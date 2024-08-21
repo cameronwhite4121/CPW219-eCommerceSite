@@ -16,6 +16,7 @@ namespace CPW219_eCommerceSite.Models
         public string Phone { get; set; }
     }
 
+    [Microsoft.EntityFrameworkCore.Keyless]
     public class RegisterViewModel
     {
         [Required]
