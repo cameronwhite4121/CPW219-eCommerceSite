@@ -11,9 +11,9 @@ namespace CPW219_eCommerceSite.Models
 
         public string Password { get; set; }
 
-        public string UserName { get; set; }
+        public string? UserName { get; set; }
 
-        public string Phone { get; set; }
+        public string? Phone { get; set; }
     }
 
     [Microsoft.EntityFrameworkCore.Keyless]
@@ -31,11 +31,13 @@ namespace CPW219_eCommerceSite.Models
 
         [Required]
         [StringLength(75, MinimumLength = 6)]
+        [DataType(DataType.Password)]
         public string Password { get; set; }
 
         [Required]
         [Compare(nameof (Password))]
         [Display(Name = "Confirm Password")]
+        [DataType(DataType.Password)]
         public string ConfirmPassword { get; set; }
     }
 }
