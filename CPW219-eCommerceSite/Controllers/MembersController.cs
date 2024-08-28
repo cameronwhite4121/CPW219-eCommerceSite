@@ -44,9 +44,11 @@ namespace CPW219_eCommerceSite.Controllers
                     Password = registerModel.Password,
                 };
 
+                // Adds member object to the db
                 _context.members.Add(newMember);
                 await _context.SaveChangesAsync();
 
+                // Logs in the newly created member autocmatically
                 LogUserIn(newMember.Email);
 
                 return RedirectToAction("Index", "Home");
