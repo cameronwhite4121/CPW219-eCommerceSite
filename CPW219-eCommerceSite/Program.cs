@@ -10,6 +10,9 @@ builder.Services.AddDbContext<ProductContext>(options =>
 
 builder.Services.AddControllersWithViews();
 
+// Allows sessions in views
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
 // Build the session
 builder.Services.AddDistributedMemoryCache();
 

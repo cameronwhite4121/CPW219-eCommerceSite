@@ -82,5 +82,11 @@ namespace CPW219_eCommerceSite.Controllers
             }
             return View(loginModel);
         }
+
+        public IActionResult Logout()
+        { 
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index", "Home");
+        }
     }
 }
