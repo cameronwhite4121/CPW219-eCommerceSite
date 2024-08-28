@@ -16,6 +16,8 @@ namespace CPW219_eCommerceSite.Data
         public DbSet<Member> members { get; set; }
     // : is inheritence
 public DbSet<CPW219_eCommerceSite.Models.RegisterViewModel> RegisterViewModel { get; set; } = default!;
+    // : is inheritence
+public DbSet<CPW219_eCommerceSite.Models.LoginViewModel> LoginViewModel { get; set; } = default!;
 
     }
 }

@@ -10,6 +10,14 @@ builder.Services.AddDbContext<ProductContext>(options =>
 
 builder.Services.AddControllersWithViews();
 
+// Allows sessions in views
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+// Build the session
+builder.Services.AddDistributedMemoryCache();
+
+builder.Services.AddSession();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -26,6 +34,9 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+
+// Use the session
+app.UseSession();
 
 app.MapControllerRoute(
 	name: "default",
