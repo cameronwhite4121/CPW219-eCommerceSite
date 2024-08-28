@@ -47,6 +47,8 @@ namespace CPW219_eCommerceSite.Controllers
                 _context.members.Add(newMember);
                 await _context.SaveChangesAsync();
 
+                LogUserIn(newMember.Email);
+
                 return RedirectToAction("Index", "Home");
 
             }
@@ -73,7 +75,7 @@ namespace CPW219_eCommerceSite.Controllers
                 // If member exists, send member to home page, logged in
                 if (currMember != null)
                 {
-                    HttpContext.Session.SetString("Email", loginModel.Email);
+                    LogUserIn(loginModel.Email);
                     return RedirectToAction("Index", "Home");
                 }
 
@@ -81,6 +83,15 @@ namespace CPW219_eCommerceSite.Controllers
                 ModelState.AddModelError("","Login invalid");
             }
             return View(loginModel);
+        }
+
+        /// <summary>
+        /// This method takes the users email to log a user in
+        /// </summary>
+        /// <param name="email"></param>
+        private void LogUserIn(string email)
+        {
+            HttpContext.Session.SetString("Email", email);
         }
 
         public IActionResult Logout()
