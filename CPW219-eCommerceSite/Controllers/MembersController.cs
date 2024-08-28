@@ -73,6 +73,7 @@ namespace CPW219_eCommerceSite.Controllers
                 // If member exists, send member to home page, logged in
                 if (currMember != null)
                 {
+                    HttpContext.Session.SetString("Email", loginModel.Email);
                     return RedirectToAction("Index", "Home");
                 }
 
